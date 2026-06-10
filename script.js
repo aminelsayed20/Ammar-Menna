@@ -1,7 +1,4 @@
-/* ============================================================
-   Wedding Invitation — vanilla JS
-   Mirrors the original React behavior 1:1.
-   ============================================================ */
+
 
 // ----- Preloader -----
 (function () {

@@ -1,8 +1,4 @@
-/* ============================================================
-   Wedding Invitation â€” Adam & Farah
-   Pure CSS port of the original Tailwind design (no framework).
-   All colors HSL. Same tokens, same animations, same layout.
-   ============================================================ */
+
 
 :root {
   --background: 36 45% 96%;
@@ -40,6 +36,21 @@
   --font-display: "Shrikhand", "Caveat", cursive;
   --font-script: "Caveat", cursive;
   --font-serif: "Cormorant Garamond", serif;
+
+
+
+
+
+    --background: 36 45% 96%;
+  --foreground: 18 32% 24%;
+
+  --card: 36 50% 98%;
+  --card-foreground: 18 32% 24%;
+
+  --primary: 18 45% 38%;
+  --primary-foreground: 36 50% 98%;
+
+  --accent: 350 60% 85%;
 }
 
 * { box-sizing: border-box; }
@@ -550,14 +561,15 @@ img { max-width: 100%; display: block; }
 @media (min-width: 640px) { .message-quote { font-size: 1.875rem; } }
 
 .player {
-  display: flex;
-  align-items: center;
   gap: 1rem;
   margin-top: 1.5rem;
+  position: fixed;
+    bottom: 2vh;
+    right: 2vh;
 }
 .play-button {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 9999px;
   background: hsl(var(--warm-brown));
   color: hsl(var(--cream));
