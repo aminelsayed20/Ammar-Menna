@@ -241,10 +241,100 @@ img { max-width: 100%; display: block; }
 .hero-couple-name {
   text-align: center;
   margin-top: 2.5rem;
-  font-size: 1.875rem;
+  font-size: 1.4rem;
 }
 @media (min-width: 640px) { .hero-couple-name { font-size: 2.25rem; } }
 .hero-couple-name .amp { color: hsl(var(--blush-deep)); }
+
+/* =================== COUNTDOWN =================== */
+  .countdown-section {
+    padding: 50px 20px;
+    background: transparent;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .countdown-section::before {
+    content: 'A & M';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Noto Serif Arabic', serif;
+    font-size: clamp(120px, 30vw, 280px);
+    font-weight: 700;
+    color: #51352a0f;
+    pointer-events: none;
+    white-space: nowrap;
+    font-family: var(--font-script);
+    margin-top: 24px;
+  }
+  body.lang-en .countdown-section::before { content: 'H & S'; font-family: 'Cormorant Garamond', serif; letter-spacing: -10px; }
+  .countdown-label {
+
+    font-size:  clamp(28px, 2vw, 50px); letter-spacing: 1px;
+    color: var(--warm-brown); margin-bottom: 20px; display: block;
+    font-family: var(--font-script);
+  }
+  body.lang-en .countdown-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+  }
+  .countdown-title {
+    font-family: 'Noto Serif Arabic', serif;
+    font-size: clamp(24px, 5vw, 40px);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 56px;
+  }
+  body.lang-en .countdown-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+  .countdown-grid {
+    display: flex; gap: clamp(16px, 4vw, 48px);
+    justify-content: center; align-items: center;
+    flex-wrap: nowrap;
+  }
+  .countdown-item { text-align: center; min-width: 56px; }
+  .countdown-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 12vw, 100px);
+    font-weight: 300;
+    color: var(--warm-brown);
+    line-height: 1;
+    display: block;
+    position: relative;
+  }
+  .countdown-num::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .countdown-unit {
+
+    font-size: clamp(18px, 1.5vw, 34px); letter-spacing: 1px;
+    font-family: var(--font-script);
+    margin-top: 10px;
+    color: var(--warm-brown);
+    display: block;
+  }
+  body.lang-en .countdown-unit {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  }
+  .countdown-sep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 60px; font-weight: 300;
+    color: var(--gold);
+    opacity: 0.4; line-height: 1;
+    padding-bottom: 28px;
+    animation: blink 1s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.1; }
+  }
+
 
 /* ===== Invitation Message ===== */
 .invitation {
@@ -563,7 +653,7 @@ img { max-width: 100%; display: block; }
 .player {
   gap: 1rem;
   margin-top: 1.5rem; 
-  
+
   position: fixed;
     bottom: 2vh;
     right: 2vh;
@@ -627,7 +717,7 @@ img { max-width: 100%; display: block; }
 }
 @media (min-width: 640px) { .closing-with { font-size: 2.25rem; } }
 .closing-couple {
-  font-size: 3rem;
+  font-size: 2rem;
   margin-top: 0.5rem;
   letter-spacing: 0.05em;
 }

@@ -10,13 +10,14 @@
 
 // ----- Audio Player -----
 (function () {
-  const audio  = document.getElementById('audio-player');
-  const btn    = document.getElementById('play-toggle');
-  const playI  = document.getElementById('play-icon');
+  const audio = document.getElementById('audio-player');
+  const btn = document.getElementById('play-toggle');
+  const playI = document.getElementById('play-icon');
   const pauseI = document.getElementById('pause-icon');
-  const fill   = document.getElementById('seek-fill');
-  const bar    = document.getElementById('seek-bar');
-  const time   = document.getElementById('time-display');
+
+  const fill = document.getElementById('seek-fill');
+  const bar = document.getElementById('seek-bar');
+  const time = document.getElementById('time-display');
 
   if (!audio || !btn) return;
 
@@ -30,42 +31,68 @@
   const render = () => {
     const cur = audio.currentTime || 0;
     const dur = audio.duration || 0;
-    fill.style.width = dur ? (cur / dur) * 100 + '%' : '0%';
-    time.textContent = `${fmt(cur)} / ${fmt(dur)}`;
+
+    if (fill) {
+      fill.style.width = dur ? (cur / dur) * 100 + '%' : '0%';
+    }
+
+    if (time) {
+      time.textContent = `${fmt(cur)} / ${fmt(dur)}`;
+    }
   };
 
   audio.addEventListener('timeupdate', render);
   audio.addEventListener('loadedmetadata', render);
-  audio.addEventListener('ended', () => {
-    playI.style.display = '';
-    pauseI.style.display = 'none';
-    btn.setAttribute('aria-label', 'Play message');
-  });
 
   btn.addEventListener('click', () => {
     if (audio.paused) {
-      audio.play().then(() => {
-        playI.style.display = 'none';
-        pauseI.style.display = '';
-        btn.setAttribute('aria-label', 'Pause message');
-      }).catch(() => {});
+      audio.play();
+      playI.style.display = 'none';
+      pauseI.style.display = '';
     } else {
       audio.pause();
       playI.style.display = '';
       pauseI.style.display = 'none';
-      btn.setAttribute('aria-label', 'Play message');
     }
   });
 
-  bar.addEventListener('click', (e) => {
-    if (!audio.duration) return;
-    const rect = bar.getBoundingClientRect();
-    const ratio = (e.clientX - rect.left) / rect.width;
-    audio.currentTime = Math.max(0, Math.min(1, ratio)) * audio.duration;
-  });
+  if (bar) {
+    bar.addEventListener('click', (e) => {
+      if (!audio.duration) return;
+
+      const rect = bar.getBoundingClientRect();
+      const ratio = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = ratio * audio.duration;
+    });
+  }
 
   render();
 })();
+
+
+// ===== Countdown =====
+function updateCountdown() {
+  const wedding = new Date('2026-06-23T17:00:00+02:00');
+  const now = new Date();
+  const diff = wedding - now;
+  if (diff <= 0) {
+    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => {
+      document.getElementById(id).textContent = '00';
+    });
+    return;
+  }
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent = String(days).padStart(2 , '0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
 
 // ----- RSVP Modal -----
 (function () {
